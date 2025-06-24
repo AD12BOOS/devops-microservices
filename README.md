@@ -1,4 +1,6 @@
 # 🐳 DevOps Microservices with NGINX Reverse Proxy
+![CI](https://github.com/AD12BOOS/devops-microservices/actions/workflows/ci.yml/badge.svg)
+
 
 This project demonstrates a containerized microservice architecture using **Go**, **NGINX**, and **Docker Compose**.  
 It includes two lightweight REST APIs served via a reverse proxy and health-checked for availability.
