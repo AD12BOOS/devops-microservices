@@ -18,7 +18,9 @@ services:
       test: ["CMD", "curl", "-f", "http://localhost:8082"]
       interval: 10s
       timeout: 5s
-      retries: 3
+      retries: 5
+      start_period: 15s
+
 
   nginx:
     image: nginx:alpine
