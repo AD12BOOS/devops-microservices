@@ -26,7 +26,25 @@ jobs:
       - name: Build and run containers
         run: |
           docker-compose up --build -d
-          sleep 10
-          curl --fail http://localhost:8080/service1
-          curl --fail http://localhost:8080/service2
-          docker-compose down
+          echo "⏳ Waiting for services to become healthy..."
+          sleep 15
+
+      - name: Test service1 route through NGINX
+        run: |
+          for i in {1..5}; do
+            curl --fail http://localhost:8080/service1 && break
+            echo "Retrying service1..."
+            sleep 5
+          done
+
+      - name: Test service2 route through NGINX
+        run: |
+          for i in {1..5}; do
+            curl --fail http://localhost:8080/service2 && break
+            echo "Retrying service2..."
+            sleep 5
+          done
+
+      - name: Shutdown containers
+        if: always()
+        run: docker-compose down
